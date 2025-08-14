@@ -1,0 +1,491 @@
+/* Base styles */
+:root {
+  --electric-blue: #00FFFF; /* A bright, vibrant cyan/blue */
+  --dark-blue-tint: rgba(30, 60, 114, 0.8); /* Darker blue for header transparency */
+  --card-bg-transparent: rgba(255, 255, 255, 0.7); /* Semi-transparent white for cards */
+  --project-bg-transparent: rgba(91, 116, 172, 0.8); /* Semi-transparent darker blue for projects */
+  --text-color-dark: #333;
+  --text-color-light: #00070c; /* Adjusted for better contrast on transparent project cards */
+  --heading-color: #2c3e50;
+  --link-color: #3498db;
+  --link-hover-color: #2980b9;
+  --button-primary: #3498db;
+  --button-primary-hover: #2980b9;
+  --button-secondary: #6c757d;
+  --button-secondary-hover: #5a6268;
+}
+
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(to right, #6782ad, #f8f9fc);
+  color: var(--text-color-dark);
+  line-height: 2;
+  background-image: url(backimage.png);
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+.container {
+  max-width: 1000px;
+  margin: auto;
+  padding: 20px;
+}
+
+/* Header */
+header {
+  background: var(--dark-blue-tint); /* Semi-transparent dark blue */
+  color: white;
+  padding: 20px 20px;
+  text-align: center;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.2); /* Slightly stronger shadow for transparent header */
+  backdrop-filter: blur(5px); /* Frosted glass effect */
+  position: sticky; /* Make header sticky */
+  top: 0;
+  z-index: 1000; /* Ensure header stays on top */
+}
+
+header nav {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+}
+
+header nav a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1.1em;
+  padding: 5px 10px;
+  transition: color 0.3s ease, transform 0.3s ease, text-shadow 0.3s ease; /* Add text-shadow transition */
+  position: relative;
+}
+
+header nav a:hover {
+  color: var(--electric-blue); /* Electric blue on hover */
+  transform: translateY(-2px);
+  text-shadow: 0 0 8px var(--electric-blue); /* Neon glow effect */
+}
+
+header nav a.active {
+  color: var(--electric-blue); /* Electric blue when active */
+  text-shadow: 0 0 8px var(--electric-blue); /* Neon glow effect */
+}
+
+header nav a::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  background: var(--electric-blue); /* Electric blue underline */
+  left: 50%;
+  bottom: -5px;
+  transform: translateX(-50%);
+  transition: width 0.3s ease, box-shadow 0.3s ease; /* Add box-shadow transition */
+}
+
+header nav a:hover::after,
+header nav a.active::after {
+  width: 100%;
+  box-shadow: 0 0 10px var(--electric-blue); /* Neon glow for underline */
+}
+
+/* Profile Section */
+.profile {
+  text-align: center;
+  margin-bottom: 10px;
+  padding-top: 10px;
+}
+
+.profile-img {
+  width: 350px;
+  height: 350px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin: 0 auto 15px;
+  border: 5px solid var(--electric-blue); /* Electric blue border */
+  box-shadow: 0 0 20px var(--electric-blue), 0 0 40px var(--electric-blue), 0 0 60px var(--electric-blue); /* Stronger neon glow */
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.profile-img:hover {
+  transform: scale(1.05) rotate(5deg);
+  box-shadow: 0 0 30px var(--electric-blue), 0 0 60px var(--electric-blue), 0 0 90px var(--electric-blue); /* Enhanced glow on hover */
+}
+
+.profile h1 {
+  font-size: 2.8em;
+  color: black;
+  margin-bottom: 5px;
+  text-shadow: 2px 2px 10px rgba(0, 255, 255, 0.5); /* Subtle electric blue text shadow */
+}
+
+/* Sections (Cards) */
+.card {
+  background: var(--card-bg-transparent); /* Semi-transparent white */
+  border-radius: 12px;
+  padding: 30px;
+  margin-bottom: 40px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15); /* Slightly stronger shadow */
+  animation: fadeIn 1s ease-in;
+  backdrop-filter: blur(3px); /* Subtle frosted glass effect for cards */
+  border: 1px solid rgba(0, 255, 255, 0.3); /* Light electric blue border */
+}
+
+.card h2 {
+  color: var(--heading-color);
+  margin-bottom: 20px;
+  border-bottom: 3px solid var(--electric-blue); /* Electric blue border */
+  padding-bottom: 10px;
+  font-size: 2em;
+  text-shadow: 1px 1px 5px rgba(0, 255, 255, 0.3); /* Subtle electric blue text shadow */
+}
+
+.card h3 {
+  margin-top: 25px;
+  color: var(--heading-color);
+  font-size: 1.4em;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+ul li {
+  background: rgba(240, 248, 255, 0.8); /* Slightly transparent light blue */
+  margin-bottom: 10px;
+  padding: 12px 15px;
+  border-left: 4px solid var(--electric-blue); /* Electric blue border */
+  border-radius: 5px;
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+ul li:hover {
+  background: rgba(230, 242, 255, 0.9); /* Slightly less transparent on hover */
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.5); /* Electric blue glow on hover */
+}
+
+/* Projects Grid (for projects.html and index.html preview) */
+.projects-container, .projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 30px;
+  margin-top: 20px;
+}
+
+.project, .project-item {
+  background: var(--project-bg-transparent); /* Semi-transparent darker blue */
+  border-radius: 12px;
+  padding: 25px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.2); /* Stronger shadow */
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border: 1px solid rgba(0, 255, 255, 0.2); /* Subtle electric blue border */
+}
+
+.project:hover, .project-item:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 0 25px var(--electric-blue), 0 0 50px rgba(0, 255, 255, 0.3); /* Stronger electric blue glow */
+  border: 1px solid var(--electric-blue); /* Solid electric blue border on hover */
+}
+
+.project img, .project-item img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.3); /* Light transparent border */
+}
+
+.project h3, .project-item h3 {
+  font-size: 1.5em;
+  color: #ffffff; /* White text for better contrast on dark transparent background */
+  margin-bottom: 10px;
+  text-shadow: 0 0 5px var(--electric-blue); /* Subtle neon glow for project titles */
+}
+
+.project p, .project-item p {
+  font-size: 0.95em;
+  color: rgba(255, 255, 255, 0.9); /* Lighter text for better contrast */
+  flex-grow: 1;
+  margin-bottom: 20px;
+}
+
+.project-links {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: auto;
+}
+
+/* Button Styles */
+a.btn {
+  display: inline-block;
+  padding: 12px 24px;
+  background: var(--button-primary);
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+  transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease, border 0.3s ease;
+  font-weight: 600;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  border: 1px solid transparent; /* Add border for consistent sizing with hover */
+}
+
+a.btn:hover {
+  background: var(--button-primary-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 0 15px var(--electric-blue), 0 0 30px rgba(0, 255, 255, 0.3); /* Electric blue glow on hover */
+  border: 1px solid var(--electric-blue); /* Electric blue border on hover */
+}
+
+.btn-secondary {
+  background: var(--button-secondary);
+}
+
+.btn-secondary:hover {
+  background: var(--button-secondary-hover);
+  box-shadow: 0 0 15px var(--electric-blue), 0 0 30px rgba(0, 255, 255, 0.3); /* Electric blue glow on hover */
+  border: 1px solid var(--electric-blue); /* Electric blue border on hover */
+}
+
+/* Contact Page Specific Styles */
+.contact-intro {
+  font-size: 1.1em;
+  text-align: center;
+  margin-bottom: 30px;
+  color: var(--text-color-dark);
+}
+
+.contact-details {
+  background: rgba(249, 249, 249, 0.8); /* Semi-transparent light background */
+  border: 1px solid rgba(0, 255, 255, 0.2); /* Light electric blue border */
+  border-radius: 8px;
+  padding: 25px;
+  margin: 0 auto 30px;
+  max-width: 500px;
+  text-align: left;
+  box-shadow: inset 0 0 10px rgba(0, 255, 255, 0.1); /* Subtle inner electric blue shadow */
+  backdrop-filter: blur(2px); /* Light frosted glass effect */
+}
+
+.contact-details p {
+  margin-bottom: 10px;
+  font-size: 1.1em;
+  color: var(--text-color-dark);
+}
+
+.contact-details p strong {
+  color: var(--heading-color);
+}
+
+.contact-details a {
+  color: var(--link-color);
+  text-decoration: none;
+  transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+.contact-details a:hover {
+  color: var(--electric-blue); /* Electric blue on hover */
+  text-decoration: underline;
+  text-shadow: 0 0 5px var(--electric-blue); /* Neon glow for links */
+}
+
+/* Footer */
+footer {
+  background: rgba(44, 62, 80, 0.9); /* Slightly transparent dark footer */
+  color: white;
+  text-align: center;
+  padding: 30px 20px;
+  margin-top: 50px;
+  backdrop-filter: blur(3px); /* Frosted glass effect */
+}
+
+footer h2 {
+  margin-bottom: 20px;
+  color: #fff;
+}
+
+.social-icons {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.social-icons img {
+  width: 40px;
+  height: 40px;
+  margin: 0 12px;
+  transition: transform 0.3s ease, filter 0.3s ease, box-shadow 0.3s ease;
+  filter: grayscale(80%) brightness(1.2); /* Slightly desaturated and brighter */
+  border-radius: 50%; /* Make icons round */
+}
+
+.social-icons img:hover {
+  transform: scale(1.2);
+  filter: grayscale(0%) brightness(1.5); /* Full color and brighter on hover */
+  box-shadow: 0 0 15px var(--electric-blue), 0 0 30px rgba(0, 255, 255, 0.5); /* Electric blue glow on hover */
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in {
+  animation: fadeIn 1s ease-in;
+}
+
+.fade-in-up {
+  animation: fadeIn 1.2s ease-out;
+}
+
+.slide-in {
+  animation: fadeIn 1s ease-in;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  header nav {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  header nav a {
+    font-size: 1em;
+  }
+
+  .profile h1 {
+    font-size: 2.2em;
+  }
+
+  .card {
+    padding: 20px;
+  }
+
+  .card h2 {
+    font-size: 1.8em;
+  }
+
+  .projects-container, .projects-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .project, .project-item {
+    padding: 20px;
+  }
+
+  .social-icons img {
+    width: 35px;
+    height: 35px;
+    margin: 0 8px;
+  }
+
+  .skills-container {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .skills-column:first-child {
+    border-right: none;
+    border-bottom: 1px solid rgba(0, 255, 255, 0.2); /* Electric blue border for separation */
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 15px;
+  }
+
+  header {
+    padding: 15px;
+  }
+
+  .profile-img {
+    width: 120px;
+    height: 120px;
+  }
+
+  .profile h1 {
+    font-size: 1.8em;
+  }
+
+  .card {
+    padding: 15px;
+    margin-bottom: 30px;
+  }
+
+  .card h2 {
+    font-size: 1.5em;
+  }
+
+  a.btn {
+    padding: 10px 20px;
+    font-size: 0.9em;
+  }
+}
+
+/* --- Skills Section Specific Styles --- */
+.skills-container {
+  display: flex;
+  gap: 30px;
+}
+
+.skills-column {
+  flex: 1;
+  padding: 20px;
+}
+
+.skills-column:first-child {
+  border-right: 1px solid rgba(0, 255, 255, 0.2); /* Electric blue border */
+}
+
+.skills-container h2 {
+  font-size: 28px;
+  margin-bottom: 20px;
+  color: var(--heading-color);
+  text-align: center;
+}
+
+.skills-container h3 {
+  font-size: 20px;
+  margin-top: 0;
+  margin-bottom: 15px;
+  color: var(--heading-color);
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--electric-blue); /* Electric blue border */
+  text-shadow: 0 0 5px rgba(0, 255, 255, 0.2); /* Subtle neon glow */
+}
+
+.skills-container ul {
+  list-style: none;
+  padding: 0;
+}
+
+.skills-container li {
+  position: relative;
+  padding-left: 25px;
+}
+
+.skills-container li:before {
+  content: "•";
+  color: var(--electric-blue); /* Electric blue bullet */
+  font-weight: bold;
+  font-size: 20px;
+  position: absolute;
+  left: 0;
+  top: 8px;
+  text-shadow: 0 0 5px var(--electric-blue); /* Neon glow for bullet */
+}

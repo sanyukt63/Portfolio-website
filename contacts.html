@@ -1,0 +1,241 @@
+<html>
+  <head>
+    <title>Portfolio - Contact</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      /* Define CSS variables for the new Royal Space Feel palette */
+      :root {
+        --color-base: #0F172A; /* Deep Space Navy */
+        --color-charcoal-blue: #1E293B; /* Slightly lighter for cards/sections */
+        --color-primary-accent: #E0C097; /* Muted Royal Gold */
+        --color-secondary-accent: #38BDF8; /* Soft Teal Blue */
+        --color-text-light-gray: #E2E8F0; /* Main text */
+        --color-text-muted-silver: #CBD5E1; /* Paragraphs inside cards */
+        --color-text-slate-gray: #94A3B8; /* Secondary text, footer */
+      }
+
+      /* General Body Background */
+      body {
+        background-color: var(--color-base);
+        color: var(--color-text-light-gray);
+        font-family: sans-serif;
+      }
+
+      /* Header Gradient Animation */
+      @keyframes headerGradient {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+      }
+
+      .animated-header-bg {
+        background: linear-gradient(135deg, #0F172A, #1E293B, #0F172A);
+        background-size: 400% 400%;
+        animation: headerGradient 15s ease infinite;
+      }
+
+      /* Custom styles for a more vibrant look */
+      .hover-scale-shadow:hover {
+        transform: translateY(-5px) scale(1.02);
+        box-shadow: 0 15px 30px rgba(224, 192, 151, 0.3);
+      }
+      
+      .social-icon-hover:hover {
+        transform: scale(1.2);
+        filter: drop-shadow(0 0 8px var(--color-secondary-accent));
+      }
+      
+      .btn-glow:hover {
+        box-shadow: 0 0 20px var(--color-primary-accent);
+      }
+
+      /* Navbar Link Styles */
+      .nav-link {
+        position: relative;
+        display: inline-block;
+        background-color: transparent;
+        color: var(--color-text-light-gray);
+        padding: 10px 20px;
+        text-decoration: none;
+        transition: color 0.3s ease;
+        z-index: 2;
+      }
+
+      .nav-link::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 0%;
+        height: 2px;
+        background-color: var(--color-secondary-accent);
+        transition: width 0.3s ease-in-out;
+        z-index: 1;
+      }
+
+      .nav-link:hover::after {
+        width: 100%;
+      }
+
+      .nav-link.active {
+        color: var(--color-primary-accent);
+      }
+
+      .nav-link.active::after {
+        width: 100%;
+        box-shadow: 0 0 10px var(--color-secondary-accent);
+      }
+
+      /* Particles Canvas */
+      #particles {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+        pointer-events: none;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="flex justify-between items-center px-6 md:px-10 py-6 border-b border-gray-800 animated-header-bg fixed top-0 w-full z-50 relative overflow-hidden">
+      <canvas id="particles"></canvas>
+      <h1 class="text-2xl font-bold text-[var(--color-primary-accent)] z-20">Portfolio</h1>
+      <nav class="flex gap-5 text-sm md:text-base z-20">
+        <a href="index.html" class="nav-link">🏠 Home</a>
+        <a href="projects.html" class="nav-link">💻 Projects</a>
+        <a href="services.html" class="nav-link">🤝 Services</a>
+        <a href="contacts.html" class="nav-link">📜 Certificates</a>
+        <a href="contacts.html" class="nav-link active">✉️ Contact</a>
+      </nav>
+    </header>
+
+    <!-- Contact Section -->
+    <main class="px-6 md:px-10 py-12 pt-24">
+      <h2 class="text-4xl md:text-5xl font-extrabold mb-10 text-center text-[var(--color-primary-accent)]">Get in Touch</h2>
+      
+      <!-- Contact Info Cards -->
+      <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto mb-12">
+        <div class="bg-[var(--color-charcoal-blue)] p-8 rounded-2xl shadow-xl hover-scale-shadow transition duration-300 ease-in-out border border-[var(--color-text-slate-gray)]/20">
+          <h3 class="text-2xl font-bold text-[var(--color-primary-accent)] mb-4">Email</h3>
+          <p class="text-[var(--color-text-muted-silver)] text-lg">sanyuktkumarrai@gmail.com</p>
+        </div>
+
+        <div class="bg-[var(--color-charcoal-blue)] p-8 rounded-2xl shadow-xl hover-scale-shadow transition duration-300 ease-in-out border border-[var(--color-text-slate-gray)]/20">
+          <h3 class="text-2xl font-bold text-[var(--color-primary-accent)] mb-4">Phone</h3>
+          <p class="text-[var(--color-text-muted-silver)] text-lg">+91-831520347</p>
+        </div>
+
+        <div class="bg-[var(--color-charcoal-blue)] p-8 rounded-2xl shadow-xl hover-scale-shadow transition duration-300 ease-in-out border border-[var(--color-text-slate-gray)]/20">
+          <h3 class="text-2xl font-bold text-[var(--color-primary-accent)] mb-4">Location</h3>
+          <p class="text-[var(--color-text-muted-silver)] text-lg">Bhubaneswar, India</p>
+        </div>
+      </div>
+
+      <!-- Resume Button -->
+      <div class="text-center mb-12">
+        <a href="CV-Sanyukt Kumar Rai.pdf" target="_blank" class="px-8 py-4 rounded-full bg-[var(--color-primary-accent)] text-[var(--color-base)] font-semibold text-lg shadow-lg hover:shadow-xl btn-glow transition duration-300 ease-in-out">
+          Download My Resume
+        </a>
+      </div>
+
+      <!-- Social Links -->
+      <div class="max-w-4xl mx-auto">
+        <div class="bg-[var(--color-charcoal-blue)] p-8 rounded-2xl shadow-xl hover-scale-shadow transition duration-300 ease-in-out border border-[var(--color-text-slate-gray)]/20 text-center">
+          <h3 class="text-2xl font-bold text-[var(--color-primary-accent)] mb-6">Connect with me</h3>
+          <div class="flex flex-wrap justify-center gap-6">
+            <a href="https://www.instagram.com/sanyukt.311/" target="_blank" class="social-icon-hover transition duration-300 ease-in-out">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram" width="45"/>
+            </a>
+            <a href="https://www.linkedin.com/in/sanyukt-kumar-rai-8291a4324/" target="_blank" class="social-icon-hover transition duration-300 ease-in-out">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png" alt="LinkedIn" width="45"/>
+            </a>
+            <a href="https://x.com/sanyukt12" target="_blank" class="social-icon-hover transition duration-300 ease-in-out">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/X_logo_2023_original.svg" alt="X" width="45"/>
+            </a>
+            <a href="https://github.com/sanyukt63" target="_blank" class="social-icon-hover transition duration-300 ease-in-out">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg" alt="GitHub" width="45"/>
+            </a>
+            <a href="mailto:sanyukt63@gmail.com" target="_blank" class="social-icon-hover transition duration-300 ease-in-out">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Gmail_icon_%282020%29.svg" alt="Gmail" width="45"/>
+            </a>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="text-center py-8 border-t border-gray-800 text-sm text-[var(--color-text-slate-gray)] mt-12">
+      © Sanyukt Kumar Rai • Portfolio Website
+    </footer>
+
+    <!-- Particles JavaScript -->
+    <script>
+      // Particles JS for header
+      const canvas = document.getElementById('particles');
+      const ctx = canvas.getContext('2d');
+      let particles = [];
+      const numParticles = 50;
+
+      function resizeCanvas() {
+        canvas.width = canvas.offsetWidth;
+        canvas.height = canvas.offsetHeight;
+      }
+
+      class Particle {
+        constructor() {
+          this.x = Math.random() * canvas.width;
+          this.y = Math.random() * canvas.height;
+          this.size = Math.random() * 1.5 + 0.5;
+          this.speedY = Math.random() * 0.2 + 0.1;
+          this.opacity = Math.random() * 0.5 + 0.2;
+        }
+
+        update() {
+          this.y += this.speedY;
+          if (this.y > canvas.height) {
+            this.y = 0;
+            this.x = Math.random() * canvas.width;
+          }
+        }
+
+        draw() {
+          ctx.beginPath();
+          ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(255, 255, 255, ${this.opacity})`;
+          ctx.fill();
+        }
+      }
+
+      function initParticles() {
+        particles = [];
+        for (let i = 0; i < numParticles; i++) {
+          particles.push(new Particle());
+        }
+      }
+
+      function animateParticles() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        for (let i = 0; i < particles.length; i++) {
+          particles[i].update();
+          particles[i].draw();
+        }
+        requestAnimationFrame(animateParticles);
+      }
+
+      window.addEventListener('resize', () => {
+        resizeCanvas();
+        initParticles();
+      });
+
+      // Initial setup
+      resizeCanvas();
+      initParticles();
+      animateParticles();
+    </script>
+  </body>
+</html>
+

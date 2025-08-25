@@ -1,0 +1,334 @@
+<html>
+  <head>
+    <title>Portfolio - Services</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      /* Define CSS variables for the new Royal Space Feel palette */
+      :root {
+        --color-base: #0F172A; /* Deep Space Navy */
+        --color-charcoal-blue: #1E293B; /* Slightly lighter for cards/sections */
+        --color-primary-accent: #E0C097; /* Muted Royal Gold */
+        --color-secondary-accent: #38BDF8; /* Soft Teal Blue */
+        --color-text-light-gray: #E2E8F0; /* Main text */
+        --color-text-muted-silver: #CBD5E1; /* Paragraphs inside cards */
+        --color-text-slate-gray: #94A3B8; /* Secondary text, footer */
+      }
+
+      /* General Body Background */
+      body {
+        background-color: var(--color-base);
+        color: var(--color-text-light-gray);
+        min-width: 320px; /* Prevent horizontal scrolling on mobile */
+      }
+
+      /* Header Gradient Animation */
+      @keyframes headerGradient {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+      }
+
+      .animated-header-bg {
+        background: linear-gradient(135deg, #0F172A, #1E293B, #0F172A); /* Base and Charcoal Blue */
+        background-size: 400% 400%;
+        animation: headerGradient 15s ease infinite;
+      }
+
+      /* Custom styles for a more vibrant look */
+      .hover-scale-shadow:hover {
+        transform: translateY(-5px) scale(1.02);
+        box-shadow: 0 15px 30px rgba(224, 192, 151, 0.3); /* Royal Gold glow */
+      }
+      .btn-glow:hover {
+        box-shadow: 0 0 20px var(--color-primary-accent); /* Royal Gold glow for button */
+      }
+      .service-icon-bg {
+        background-color: rgba(224, 192, 151, 0.2); /* Semi-transparent Royal Gold background for icons */
+        border: 2px solid rgba(224, 192, 151, 0.3);
+        border-radius: 12px;
+        transition: all 0.3s ease-in-out;
+      }
+      .service-icon-bg:hover {
+        background-color: rgba(224, 192, 151, 0.3);
+        transform: scale(1.1);
+        box-shadow: 0 0 15px rgba(224, 192, 151, 0.5);
+      }
+      .project-link:hover {
+        background-color: var(--color-secondary-accent); /* Soft Teal Blue on hover */
+        box-shadow: 0 0 15px var(--color-secondary-accent); /* Soft Teal Blue glow for button */
+      }
+      .project-image-container {
+        position: relative;
+        overflow: hidden;
+        border-radius: 16px;
+      }
+      .project-image {
+        transition: transform 0.5s ease-in-out;
+      }
+      .project-card:hover .project-image {
+        transform: scale(1.05);
+      }
+      .image-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(45deg, rgba(224, 192, 151, 0.1), rgba(15, 23, 42, 0.8)); /* Royal Gold to Base */
+        opacity: 0;
+        transition: opacity 0.3s ease-in-out;
+      }
+      .project-card:hover .image-overlay {
+        opacity: 1;
+      }
+      .skill-tag:hover {
+        background-color: var(--color-secondary-accent); /* Soft Teal Blue */
+        color: var(--color-base); /* Text color changes to base on hover */
+        transform: scale(1.1);
+        box-shadow: 0 0 10px var(--color-secondary-accent); /* Soft Teal Blue glow */
+      }
+      .social-icon-hover:hover {
+        transform: scale(1.2);
+        filter: drop-shadow(0 0 8px var(--color-secondary-accent));
+      }
+
+      /* Navbar Link Styles */
+      .nav-link {
+        position: relative;
+        display: inline-block;
+        background-color: transparent;
+        color: var(--color-text-light-gray); /* Main text color for nav links */
+        padding: 10px 20px;
+        text-decoration: none;
+        transition: color 0.3s ease;
+        z-index: 2; /* Ensure nav links are above particles */
+      }
+
+      .nav-link::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 0%; /* Initially hidden */
+        height: 2px; /* Thin bar */
+        background-color: var(--color-secondary-accent); /* Soft Teal Blue for underline */
+        transition: width 0.3s ease-in-out; /* Smooth slide-in */
+        z-index: 1;
+      }
+
+      .nav-link:hover::after {
+        width: 100%; /* Show line on hover */
+      }
+
+      .nav-link.active {
+        color: var(--color-primary-accent); /* Royal Gold for active link text */
+      }
+
+      .nav-link.active::after {
+        width: 100%; /* Keep line visible for active link */
+        box-shadow: 0 0 10px var(--color-secondary-accent); /* Soft Teal Blue glow for active link */
+      }
+
+      /* Particles Canvas */
+      #particles {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 0; /* Behind header content */
+        pointer-events: none; /* Allow clicks to pass through */
+      }
+
+      /* Mobile adjustments */
+      @media (max-width: 768px) {
+        body {
+          zoom: 0.8; /* Scale down for mobile to maintain desktop layout */
+          transform: scale(0.8);
+          transform-origin: top center;
+          width: 125%; /* Compensate for scaling */
+        }
+        
+        header {
+          padding: 1rem;
+        }
+        
+        .nav-link {
+          padding: 8px 12px;
+          font-size: 14px;
+        }
+
+        /* Adjustments for project cards on mobile */
+        .grid.md\:grid-cols-2.lg\:grid-cols-3 {
+            grid-template-columns: 1fr; /* Stack cards vertically */
+        }
+      }
+    </style>
+  </head>
+  <body class="font-sans">
+    <!-- Header -->
+    <header class="flex justify-between items-center px-6 md:px-10 py-6 border-b border-gray-800 animated-header-bg fixed top-0 w-full z-50 relative overflow-hidden">
+      <canvas id="particles"></canvas>
+      <h1 class="text-2xl font-bold text-[var(--color-primary-accent)] z-20">Portfolio</h1>
+      <nav class="flex gap-5 text-sm md:text-base z-20">
+        <a href="index.html" class="nav-link">🏠 Home</a>
+        <a href="projects.html" class="nav-link">💻 Projects</a>
+        <a href="services.html" class="nav-link active">🤝 Services</a>
+        <a href="services.html" class="nav-link">📜 Certificates</a>
+        <a href="contacts.html" class="nav-link">✉️ Contact</a>
+      </nav>
+    </header>
+
+    <!-- Services Section -->
+    <main class="px-6 py-12 flex flex-col items-center pt-24">
+      <h2 class="text-4xl md:text-5xl font-extrabold mb-10 text-center text-[var(--color-primary-accent)]">My Services</h2>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl w-full">
+        <!-- Service 1 -->
+        <div class="bg-[var(--color-charcoal-blue)] rounded-2xl shadow-xl hover-scale-shadow transition duration-300 ease-in-out p-8 border border-[var(--color-text-slate-gray)]/20">
+          <div class="flex items-center gap-4 mb-4">
+            <div class="service-icon-bg p-3 rounded-xl">
+              <img src="https://img.icons8.com/fluency/48/code.png" alt="Web Dev Icon" class="w-12 h-12" />
+            </div>
+            <h3 class="text-2xl font-bold text-[var(--color-primary-accent)]">Web Development</h3>
+          </div>
+          <p class="text-[var(--color-text-muted-silver)] text-lg">
+            Building modern, responsive, and user-friendly websites using HTML, CSS, JavaScript, and TailwindCSS.
+          </p>
+        </div>
+
+        <!-- Service 2 -->
+        <div class="bg-[var(--color-charcoal-blue)] rounded-2xl shadow-xl hover-scale-shadow transition duration-300 ease-in-out p-8 border border-[var(--color-text-slate-gray)]/20">
+          <div class="flex items-center gap-4 mb-4">
+            <div class="service-icon-bg p-3 rounded-xl">
+              <img src="https://img.icons8.com/fluency/48/web-design.png" alt="UI/UX Icon" class="w-12 h-12" />
+            </div>
+            <h3 class="text-2xl font-bold text-[var(--color-primary-accent)]">UI / UX Design</h3>
+          </div>
+          <p class="text-[var(--color-text-muted-silver)] text-lg">
+            Creating clean, modern, and visually appealing user interfaces that enhance the user experience.
+          </p>
+        </div>
+
+        <!-- Service 3 -->
+        <div class="bg-[var(--color-charcoal-blue)] rounded-2xl shadow-xl hover-scale-shadow transition duration-300 ease-in-out p-8 border border-[var(--color-text-slate-gray)]/20">
+          <div class="flex items-center gap-4 mb-4">
+            <div class="service-icon-bg p-3 rounded-xl">
+              <img src="https://img.icons8.com/fluency/48/artificial-intelligence.png" alt="AI Icon" class="w-12 h-12" />
+            </div>
+            <h3 class="text-2xl font-bold text-[var(--color-primary-accent)]">AI & Automation</h3>
+          </div>
+          <p class="text-[var(--color-text-muted-silver)] text-lg">
+            Developing automation solutions and exploring AI-powered tools to optimize workflows.
+          </p>
+        </div>
+
+        <!-- Service 4 -->
+        <div class="bg-[var(--color-charcoal-blue)] rounded-2xl shadow-xl hover-scale-shadow transition duration-300 ease-in-out p-8 border border-[var(--color-text-slate-gray)]/20">
+          <div class="flex items-center gap-4 mb-4">
+            <div class="service-icon-bg p-3 rounded-xl">
+              <img src="https://img.icons8.com/fluency/48/java-coffee-cup-logo.png" alt="Java Icon" class="w-12 h-12" />
+            </div>
+            <h3 class="text-2xl font-bold text-[var(--color-primary-accent)]">Java Development</h3>
+          </div>
+          <p class="text-[var(--color-text-muted-silver)] text-lg">
+            Building backend solutions and applications using Java, OOP concepts, and frameworks.
+          </p>
+        </div>
+
+        <!-- Service 5 -->
+        <div class="bg-[var(--color-charcoal-blue)] rounded-2xl shadow-xl hover-scale-shadow transition duration-300 ease-in-out p-8 border border-[var(--color-text-slate-gray)]/20">
+          <div class="flex items-center gap-4 mb-4">
+            <div class="service-icon-bg p-3 rounded-xl">
+              <img src="https://img.icons8.com/fluency/48/python.png" alt="Python Icon" class="w-12 h-12" />
+            </div>
+            <h3 class="text-2xl font-bold text-[var(--color-primary-accent)]">Python Development</h3>
+          </div>
+          <p class="text-[var(--color-text-muted-silver)] text-lg">
+            Writing efficient Python scripts for automation, data analysis, and machine learning projects.
+          </p>
+        </div>
+
+        <!-- Service 6 -->
+        <div class="bg-[var(--color-charcoal-blue)] rounded-2xl shadow-xl hover-scale-shadow transition duration-300 ease-in-out p-8 border border-[var(--color-text-slate-gray)]/20">
+          <div class="flex items-center gap-4 mb-4">
+            <div class="service-icon-bg p-3 rounded-xl">
+              <img src="https://img.icons8.com/fluency/48/task.png" alt="Soft Skills Icon" class="w-12 h-12" />
+            </div>
+            <h3 class="text-2xl font-bold text-[var(--color-primary-accent)]">Team Projects & Leadership</h3>
+          </div>
+          <p class="text-[var(--color-text-muted-silver)] text-lg">
+            Strong leadership, problem-solving, and teamwork skills developed through NCC and group projects.
+          </p>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="text-center py-8 border-t border-gray-800 text-sm text-[var(--color-text-slate-gray)]">
+      © Sanyukt Kumar Rai • Portfolio Website
+    </footer>
+
+    <script>
+      // Particles JS for header
+      const canvas = document.getElementById('particles');
+      const ctx = canvas.getContext('2d');
+      let particles = [];
+      const numParticles = 50;
+
+      function resizeCanvas() {
+        canvas.width = canvas.offsetWidth;
+        canvas.height = canvas.offsetHeight;
+      }
+
+      class Particle {
+        constructor() {
+          this.x = Math.random() * canvas.width;
+          this.y = Math.random() * canvas.height;
+          this.size = Math.random() * 1.5 + 0.5; // Smaller particles
+          this.speedY = Math.random() * 0.2 + 0.1; // Slower movement
+          this.opacity = Math.random() * 0.5 + 0.2; // Semi-transparent
+        }
+
+        update() {
+          this.y += this.speedY;
+          if (this.y > canvas.height) {
+            this.y = 0;
+            this.x = Math.random() * canvas.width;
+          }
+        }
+
+        draw() {
+          ctx.beginPath();
+          ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(255, 255, 255, ${this.opacity})`;
+          ctx.fill();
+        }
+      }
+
+      function initParticles() {
+        particles = [];
+        for (let i = 0; i < numParticles; i++) {
+          particles.push(new Particle());
+        }
+      }
+
+      function animateParticles() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        for (let i = 0; i < particles.length; i++) {
+          particles[i].update();
+          particles[i].draw();
+        }
+        requestAnimationFrame(animateParticles);
+      }
+
+      window.addEventListener('resize', () => {
+        resizeCanvas();
+        initParticles(); // Re-initialize particles on resize
+      });
+
+      // Initial setup
+      resizeCanvas();
+      initParticles();
+      animateParticles();
+    </script>
+  </body>
+</html>

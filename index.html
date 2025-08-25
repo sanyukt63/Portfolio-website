@@ -1,0 +1,384 @@
+<html>
+  <head>
+    <title>Portfolio</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      /* Define CSS variables for the new Royal Space Feel palette */
+      :root {
+        --color-base: #0F172A; /* Deep Space Navy */
+        --color-charcoal-blue: #1E293B; /* Slightly lighter for cards/sections */
+        --color-primary-accent: #E0C097; /* Muted Royal Gold */
+        --color-secondary-accent: #38BDF8; /* Soft Teal Blue */
+        --color-text-light-gray: #E2E8F0; /* Main text */
+        --color-text-muted-silver: #CBD5E1; /* Paragraphs inside cards */
+        --color-text-slate-gray: #94A3B8; /* Secondary text, footer */
+      }
+
+      /* General Body Background - Removed as header will have its own gradient */
+      body {
+        background-color: var(--color-base); /* Fallback for areas not covered by header gradient */
+        color: var(--color-text-light-gray); /* Default text color */
+        min-width: 320px; /* Prevent horizontal scrolling on mobile */
+      }
+
+      /* Header Gradient Animation */
+      @keyframes headerGradient {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+      }
+
+      .animated-header-bg {
+        background: linear-gradient(135deg, #0F172A, #1E293B, #0F172A); /* Base and Charcoal Blue */
+        background-size: 400% 400%;
+        animation: headerGradient 15s ease infinite;
+      }
+
+      /* Custom styles for a more vibrant look */
+      .hover-scale-shadow:hover {
+        transform: translateY(-5px) scale(1.02);
+        box-shadow: 0 15px 30px rgba(224, 192, 151, 0.3); /* Royal Gold glow */
+      }
+      .btn-glow:hover {
+        box-shadow: 0 0 20px var(--color-primary-accent); /* Royal Gold glow for button */
+      }
+      .skill-tag:hover {
+        background-color: var(--color-secondary-accent); /* Soft Teal Blue */
+        color: var(--color-base); /* Text color changes to base on hover */
+        transform: scale(1.1);
+        box-shadow: 0 0 10px var(--color-secondary-accent); /* Soft Teal Blue glow */
+      }
+      .project-link:hover {
+        background-color: var(--color-secondary-accent); /* Soft Teal Blue on hover */
+        box-shadow: 0 0 15px var(--color-secondary-accent); /* Soft Teal Blue glow for button */
+      }
+      .project-image-container {
+        position: relative;
+        overflow: hidden;
+        border-radius: 16px;
+      }
+      .project-image {
+        transition: transform 0.5s ease-in-out;
+      }
+      .project-card:hover .project-image {
+        transform: scale(1.05);
+      }
+      .image-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(45deg, rgba(224, 192, 151, 0.1), rgba(15, 23, 42, 0.8)); /* Royal Gold to Base */
+        opacity: 0;
+        transition: opacity 0.3s ease-in-out;
+      }
+      .project-card:hover .image-overlay {
+        opacity: 1;
+      }
+      .service-icon-bg {
+        background-color: rgba(224, 192, 151, 0.2); /* Semi-transparent Royal Gold background for icons */
+        border: 2px solid rgba(224, 192, 151, 0.3);
+        border-radius: 12px;
+        transition: all 0.3s ease-in-out;
+      }
+      .service-icon-bg:hover {
+        background-color: rgba(224, 192, 151, 0.3);
+        transform: scale(1.1);
+        box-shadow: 0 0 15px rgba(224, 192, 151, 0.5);
+      }
+      .social-icon-hover:hover {
+        transform: scale(1.2);
+        filter: drop-shadow(0 0 8px var(--color-secondary-accent));
+      }
+
+      /* Navbar Link Styles */
+      .nav-link {
+        position: relative;
+        display: inline-block;
+        background-color: transparent;
+        color: var(--color-text-light-gray); /* Main text color for nav links */
+        padding: 10px 20px;
+        text-decoration: none;
+        transition: color 0.3s ease;
+        z-index: 2; /* Ensure nav links are above particles */
+      }
+
+      .nav-link::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 0%; /* Initially hidden */
+        height: 2px; /* Thin bar */
+        background-color: var(--color-secondary-accent); /* Soft Teal Blue for underline */
+        transition: width 0.3s ease-in-out; /* Smooth slide-in */
+        z-index: 1;
+      }
+
+      .nav-link:hover::after {
+        width: 100%; /* Show line on hover */
+      }
+
+      .nav-link.active {
+        color: var(--color-primary-accent); /* Royal Gold for active link text */
+      }
+
+      .nav-link.active::after {
+        width: 100%; /* Keep line visible for active link */
+        box-shadow: 0 0 10px var(--color-secondary-accent); /* Soft Teal Blue glow for active link */
+      }
+
+      /* Particles Canvas */
+      #particles {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 0; /* Behind header content */
+        pointer-events: none; /* Allow clicks to pass through */
+      }
+
+      /* Mobile adjustments */
+      @media (max-width: 768px) {
+        body {
+          zoom: 0.8; /* Scale down for mobile to maintain desktop layout */
+          transform: scale(0.8);
+          transform-origin: top center;
+          width: 125%; /* Compensate for scaling */
+        }
+        
+        header {
+          padding: 1rem;
+        }
+        
+        .nav-link {
+          padding: 8px 12px;
+          font-size: 14px;
+        }
+
+        /* Adjustments for project cards on mobile */
+        .grid.md\:grid-cols-2.lg\:grid-cols-3 {
+            grid-template-columns: 1fr; /* Stack cards vertically */
+        }
+      }
+    </style>
+  </head>
+  <body class="font-sans">
+    <!-- Header -->
+    <header class="flex justify-between items-center px-6 md:px-10 py-6 border-b border-gray-800 animated-header-bg fixed top-0 w-full z-50 relative overflow-hidden">
+      <canvas id="particles"></canvas>
+      <h1 class="text-2xl font-bold text-[var(--color-primary-accent)] z-20">Portfolio</h1>
+      <nav class="flex gap-5 text-sm md:text-base z-20">
+        <a href="index.html" class="nav-link active">🏠 Home</a>
+        <a href="projects.html" class="nav-link">💻 Projects</a>
+        <a href="services.html" class="nav-link">🤝 Services</a>
+        <a href="index.html" class="nav-link">📜 Certificates</a>
+        <a href="contacts.html" class="nav-link">✉️ Contact</a>
+      </nav>
+    </header>
+
+    <!-- Hero -->
+    <section class="flex flex-col items-center text-center py-12 px-6 pt-32">
+      <img src="image01.jpg" alt="Profile" class="rounded-full w-44 h-44 shadow-2xl shadow-black/50 mb-6 object-cover border-4 border-[var(--color-primary-accent)]" />
+      <h2 class="text-4xl md:text-5xl font-extrabold tracking-tight text-[var(--color-primary-accent)]">Sanyukt Kumar Rai</h2>
+      <p class="text-lg md:text-xl text-[var(--color-text-light-gray)] mt-3">
+      <p>| Aspiring Software Developer | UI/UX Enthusiast |</p>
+      <p>| Skilled in HTML, CSS, JavaScript | Proficient in Java & Python |</p>
+      <p>| Passionate About Building Clean and User-Friendly Digital Experiences|</p>
+       </p>
+      <!-- Resume Button -->
+      <div class="mt-8">
+        <p class="text-center mt-8">
+          <a href="CV-Sanyukt Kumar Rai.pdf" target="_blank" class="px-8 py-4 rounded-full bg-[var(--color-primary-accent)] text-[var(--color-base)] font-semibold text-lg shadow-lg hover:shadow-xl btn-glow transition duration-300 ease-in-out">Download My Resume</a>
+        </p>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section class="px-6 md:px-10 py-10">
+      <h3 class="text-3xl md:text-4xl font-bold mb-6 text-[var(--color-primary-accent)]">About Me</h3>
+      <div class="bg-[var(--color-charcoal-blue)] p-8 rounded-2xl shadow-xl hover-scale-shadow transition duration-300 ease-in-out border border-[var(--color-text-slate-gray)]/20">
+        <p class="text-[var(--color-text-muted-silver)] leading-relaxed text-lg">
+          I'm a Computer Science and Engineering student passionate about building modern, responsive, and user-friendly websites.
+          I enjoy exploring new technologies, frameworks, and design practices to keep improving my development journey.
+        </p>
+      </div>
+    </section>
+
+    <!-- Education -->
+    <section class="px-6 md:px-10 py-10">
+      <h3 class="text-3xl md:text-4xl font-bold mb-6 text-[var(--color-primary-accent)]">Education</h3>
+      <div class="grid md:grid-cols-2 gap-8">
+        <!-- B.Tech -->
+        <div class="bg-[var(--color-charcoal-blue)] p-8 rounded-2xl shadow-xl hover-scale-shadow transition duration-300 ease-in-out border border-[var(--color-text-slate-gray)]/20">
+          <div class="flex items-start gap-5">
+            <div class="shrink-0 w-14 h-14 rounded-xl bg-[var(--color-base)] grid place-items-center text-[var(--color-primary-accent)] text-3xl">🎓</div>
+            <div>
+              <p class="text-[var(--color-text-light-gray)] font-semibold text-xl">B.Tech — Computer Science & Engineering</p>
+              <p class="text-[var(--color-text-slate-gray)] text-base mt-1">Currently pursuing</p>
+              <ul class="mt-4 space-y-2 text-[var(--color-text-muted-silver)] text-base list-disc pl-6">
+                <li>Core CS fundamentals, data structures & algorithms</li>
+                <li>Web development and UI/UX foundations</li>
+                <li>Team projects and problem solving</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- NCC -->
+        <div class="bg-[var(--color-charcoal-blue)] p-8 rounded-2xl shadow-xl hover-scale-shadow transition duration-300 ease-in-out border border-[var(--color-text-slate-gray)]/20">
+          <div class="flex items-start gap-5">
+            <div class="shrink-0 w-14 h-14 rounded-xl bg-[var(--color-base)] grid place-items-center text-[var(--color-primary-accent)] text-3xl">🏅</div>
+            <div>
+              <p class="text-[var(--color-text-light-gray)] font-semibold text-xl">NCC Experience</p>
+              <p class="text-[var(--color-text-slate-gray)] text-base mt-1">Leadership • Discipline • Responsibility</p>
+              <p class="mt-4 text-[var(--color-text-muted-silver)] text-base">
+                As an NCC Cadet, I've learned discipline, leadership, and responsibility—qualities that shape my teamwork and problem-solving approach.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Intermediate -->
+        <div class="bg-[var(--color-charcoal-blue)] p-8 rounded-2xl shadow-xl hover-scale-shadow transition duration-300 ease-in-out border border-[var(--color-text-slate-gray)]/20">
+          <div class="flex items-start gap-5">
+            <div class="shrink-0 w-14 h-14 rounded-xl bg-[var(--color-base)] grid place-items-center text-[var(--color-primary-accent)] text-3xl">📘</div>
+            <div>
+              <p class="text-[var(--color-text-light-gray)] font-semibold text-xl">Intermediate (12th)</p>
+              <p class="text-[var(--color-text-slate-gray)] text-base mt-1">Science Stream — PCM</p>
+              <p class="mt-4 text-[var(--color-text-muted-silver)] text-base">
+                Completed intermediate with focus on Physics, Chemistry, and Mathematics, building a strong foundation for engineering studies.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- High School -->
+        <div class="bg-[var(--color-charcoal-blue)] p-8 rounded-2xl shadow-xl hover-scale-shadow transition duration-300 ease-in-out border border-[var(--color-text-slate-gray)]/20">
+          <div class="flex items-start gap-5">
+            <div class="shrink-0 w-14 h-14 rounded-xl bg-[var(--color-base)] grid place-items-center text-[var(--color-primary-accent)] text-3xl">🏫</div>
+            <div>
+              <p class="text-[var(--color-text-light-gray)] font-semibold text-xl">High School (10th)</p>
+              <p class="text-[var(--color-text-slate-gray)] text-base mt-1">Completed with distinction</p>
+              <p class="mt-4 text-[var(--color-text-muted-silver)] text-base">
+                Gained fundamental knowledge in core subjects, participated in extracurricular activities, and developed problem-solving skills.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills -->
+    <section class="px-6 md:px-10 py-10">
+      <h3 class="text-3xl md:text-4xl font-bold mb-6 text-[var(--color-primary-accent)]">Skills</h3>
+      <div class="grid lg:grid-cols-2 gap-8">
+        <!-- Technical Skills -->
+        <div class="bg-[var(--color-charcoal-blue)] p-8 rounded-2xl shadow-xl hover-scale-shadow transition duration-300 ease-in-out border border-[var(--color-text-slate-gray)]/20">
+          <p class="text-[var(--color-text-light-gray)] font-semibold text-xl mb-4">Technical Skills</p>
+          <div class="flex flex-wrap gap-3">
+            <span class="px-5 py-2 rounded-full bg-[var(--color-base)] text-base skill-tag transition duration-300 ease-in-out">Java</span>
+            <span class="px-5 py-2 rounded-full bg-[var(--color-base)] text-base skill-tag transition duration-300 ease-in-out">Python</span>
+            <span class="px-5 py-2 rounded-full bg-[var(--color-base)] text-base skill-tag transition duration-300 ease-in-out">HTML</span>
+            <span class="px-5 py-2 rounded-full bg-[var(--color-base)] text-base skill-tag transition duration-300 ease-in-out">CSS</span>
+            <span class="px-5 py-2 rounded-full bg-[var(--color-base)] text-base skill-tag transition duration-300 ease-in-out">JavaScript</span>
+            <span class="px-5 py-2 rounded-full bg-[var(--color-base)] text-base skill-tag transition duration-300 ease-in-out">UI/UX</span>
+            <span class="px-5 py-2 rounded-full bg-[var(--color-base)] text-base skill-tag transition duration-300 ease-in-out">Responsive Design</span>
+          </div>
+        </div>
+
+        <!-- Soft Skills -->
+        <div class="bg-[var(--color-charcoal-blue)] p-8 rounded-2xl shadow-xl hover-scale-shadow transition duration-300 ease-in-out border border-[var(--color-text-slate-gray)]/20">
+          <p class="text-[var(--color-text-light-gray)] font-semibold text-xl mb-4">Soft Skills</p>
+          <div class="flex flex-wrap gap-3">
+            <span class="px-5 py-2 rounded-full bg-[var(--color-base)] text-base skill-tag transition duration-300 ease-in-out">Communication</span>
+            <span class="px-5 py-2 rounded-full bg-[var(--color-base)] text-base skill-tag transition duration-300 ease-in-out">Teamwork</span>
+            <span class="px-5 py-2 rounded-full bg-[var(--color-base)] text-base skill-tag transition duration-300 ease-in-out">Leadership</span>
+            <span class="px-5 py-2 rounded-full bg-[var(--color-base)] text-base skill-tag transition duration-300 ease-in-out">Problem Solving</span>
+            <span class="px-5 py-2 rounded-full bg-[var(--color-base)] text-base skill-tag transition duration-300 ease-in-out">Adaptability</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Hobbies -->
+    <section class="px-6 md:px-10 py-10">
+      <h3 class="text-3xl md:text-4xl font-bold mb-6 text-[var(--color-primary-accent)]">Hobbies</h3>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+        <div class="bg-[var(--color-charcoal-blue)] p-8 rounded-2xl shadow-xl hover-scale-shadow transition duration-300 ease-in-out text-center border border-[var(--color-text-slate-gray)]/20 text-lg">Cricket</div>
+        <div class="bg-[var(--color-charcoal-blue)] p-8 rounded-2xl shadow-xl hover-scale-shadow transition duration-300 ease-in-out text-center border border-[var(--color-text-slate-gray)]/20 text-lg">Football</div>
+        <div class="bg-[var(--color-charcoal-blue)] p-8 rounded-2xl shadow-xl hover-scale-shadow transition duration-300 ease-in-out text-center border border-[var(--color-text-slate-gray)]/20 text-lg">Chess</div>
+        <div class="bg-[var(--color-charcoal-blue)] p-8 rounded-2xl shadow-xl hover-scale-shadow transition duration-300 ease-in-out text-center border border-[var(--color-text-slate-gray)]/20 text-lg">Table Tennis</div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="text-center py-8 border-t border-gray-800 text-sm text-[var(--color-text-slate-gray)]">
+      © Sanyukt Kumar Rai • Portfolio Website
+    </footer>
+
+    <script>
+      // Particles JS for header
+      const canvas = document.getElementById('particles');
+      const ctx = canvas.getContext('2d');
+      let particles = [];
+      const numParticles = 50;
+
+      function resizeCanvas() {
+        canvas.width = canvas.offsetWidth;
+        canvas.height = canvas.offsetHeight;
+      }
+
+      class Particle {
+        constructor() {
+          this.x = Math.random() * canvas.width;
+          this.y = Math.random() * canvas.height;
+          this.size = Math.random() * 1.5 + 0.5; // Smaller particles
+          this.speedY = Math.random() * 0.2 + 0.1; // Slower movement
+          this.opacity = Math.random() * 0.5 + 0.2; // Semi-transparent
+        }
+
+        update() {
+          this.y += this.speedY;
+          if (this.y > canvas.height) {
+            this.y = 0;
+            this.x = Math.random() * canvas.width;
+          }
+        }
+
+        draw() {
+          ctx.beginPath();
+          ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(255, 255, 255, ${this.opacity})`;
+          ctx.fill();
+        }
+      }
+
+      function initParticles() {
+        particles = [];
+        for (let i = 0; i < numParticles; i++) {
+          particles.push(new Particle());
+        }
+      }
+
+      function animateParticles() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        for (let i = 0; i < particles.length; i++) {
+          particles[i].update();
+          particles[i].draw();
+        }
+        requestAnimationFrame(animateParticles);
+      }
+
+      window.addEventListener('resize', () => {
+        resizeCanvas();
+        initParticles(); // Re-initialize particles on resize
+      });
+
+      // Initial setup
+      resizeCanvas();
+      initParticles();
+      animateParticles();
+    </script>
+  </body>
+</html>

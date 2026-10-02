@@ -40,10 +40,12 @@ Open `index.html` in a browser or serve the directory with a local HTTP server.
 
 The repository includes a PDF copy of the resume: [CV-Sanyukt Kumar Rai.pdf](./CV-Sanyukt%20Kumar%20Rai.pdf).
 
+## 📱 Responsive Design
+
+The portfolio is intended to work across desktop and mobile layouts. When making UI changes, check the navigation, project cards, resume section, and contact section at both narrow and wide viewport sizes.
+
 ## 🤝 Contributing
 
 This is primarily a personal portfolio, but suggestions and improvements are welcome through issues or pull requests.
-
----
 
 ⭐ If you find the portfolio useful or want to follow the project, consider starring the repository.

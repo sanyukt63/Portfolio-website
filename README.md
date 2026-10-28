@@ -49,3 +49,14 @@ The portfolio is intended to work across desktop and mobile layouts. When making
 This is primarily a personal portfolio, but suggestions and improvements are welcome through issues or pull requests.
 
 ⭐ If you find the portfolio useful or want to follow the project, consider starring the repository.
+
+## Accessibility smoke checks
+
+When updating portfolio pages, quickly verify:
+- All interactive controls can be reached and used with a keyboard.
+- Images that convey project information have useful alternative text.
+- Heading levels describe the page structure in a logical order.
+- Text and interactive states remain legible at narrow viewport widths.
+- Animations respect the user's reduced-motion preference.
+
+These checks complement, rather than replace, browser and assistive-technology testing.

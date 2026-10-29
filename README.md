@@ -60,3 +60,7 @@ When updating portfolio pages, quickly verify:
 - Animations respect the user's reduced-motion preference.
 
 These checks complement, rather than replace, browser and assistive-technology testing.
+
+## Keyboard accessibility pass
+
+After updating navigation or interactive project sections, check keyboard reachability, visible focus indicators, logical focus order, descriptive link text, and reduced-motion support. Repeat the review at narrow viewport widths and after layout changes.

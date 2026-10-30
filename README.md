@@ -50,17 +50,14 @@ This is primarily a personal portfolio, but suggestions and improvements are wel
 
 ⭐ If you find the portfolio useful or want to follow the project, consider starring the repository.
 
-## Accessibility smoke checks
+## Accessibility checks
 
-When updating portfolio pages, quickly verify:
-- All interactive controls can be reached and used with a keyboard.
-- Images that convey project information have useful alternative text.
-- Heading levels describe the page structure in a logical order.
+After changing navigation, project cards, or other interactive sections, verify:
+- Every interactive control is reachable and usable with a keyboard.
+- Focus indicators are visible and the focus order is logical.
+- Links have descriptive text and informative images have useful alternative text.
+- Heading levels follow a logical page structure.
 - Text and interactive states remain legible at narrow viewport widths.
 - Animations respect the user's reduced-motion preference.
 
-These checks complement, rather than replace, browser and assistive-technology testing.
-
-## Keyboard accessibility pass
-
-After updating navigation or interactive project sections, check keyboard reachability, visible focus indicators, logical focus order, descriptive link text, and reduced-motion support. Repeat the review at narrow viewport widths and after layout changes.
+These are smoke checks, not a substitute for broader browser and assistive-technology testing. Repeat them after significant layout or interaction changes.

@@ -1,6 +1,6 @@
 # 🌐 Sanyukt Kumar Rai — Portfolio
 
-Personal portfolio website showcasing my projects, skills, certificates, and developer work.
+Personal portfolio website showcasing projects, skills, certificates, and developer work.
 
 ## ✨ What you'll find
 
@@ -9,7 +9,7 @@ Personal portfolio website showcasing my projects, skills, certificates, and dev
 - 🏆 Certificates and achievements
 - 📄 Resume
 - 📬 Contact section
-- 🎨 Custom responsive UI
+- 🎨 Responsive interface
 
 ## 🖼️ Featured Projects
 
@@ -21,12 +21,22 @@ Personal portfolio website showcasing my projects, skills, certificates, and dev
 
 ## 🚀 Run Locally
 
+Clone the repository:
+
 ```bash
 git clone https://github.com/sanyukt63/Portfolio-website.git
 cd Portfolio-website
 ```
 
-Open `index.html` in a browser or serve the directory with a local HTTP server.
+You can open `index.html` directly in a browser. For a local HTTP preview, run:
+
+```bash
+python -m http.server 8000
+```
+
+Then visit [http://localhost:8000](http://localhost:8000). Stop the server with `Ctrl+C`.
+
+This is a static HTML/CSS/JavaScript site; the repository does not require an npm install step to preview the pages.
 
 ## 📁 Main Pages
 
@@ -42,17 +52,12 @@ The repository includes a PDF copy of the resume: [CV-Sanyukt Kumar Rai.pdf](./C
 
 ## 📱 Responsive Design
 
-The portfolio is intended to work across desktop and mobile layouts. When making UI changes, check the navigation, project cards, resume section, and contact section at both narrow and wide viewport sizes.
+The portfolio is intended to work across desktop and mobile layouts. When making UI changes, check navigation, project cards, the resume section, and the contact section at both narrow and wide viewport sizes.
 
-## 🤝 Contributing
-
-This is primarily a personal portfolio, but suggestions and improvements are welcome through issues or pull requests.
-
-⭐ If you find the portfolio useful or want to follow the project, consider starring the repository.
-
-## Accessibility checks
+## ♿ Accessibility checks
 
 After changing navigation, project cards, or other interactive sections, verify:
+
 - Every interactive control is reachable and usable with a keyboard.
 - Focus indicators are visible and the focus order is logical.
 - Links have descriptive text and informative images have useful alternative text.
@@ -60,4 +65,10 @@ After changing navigation, project cards, or other interactive sections, verify:
 - Text and interactive states remain legible at narrow viewport widths.
 - Animations respect the user's reduced-motion preference.
 
-These are smoke checks, not a substitute for broader browser and assistive-technology testing. Repeat them after significant layout or interaction changes.
+These are smoke checks, not a substitute for broader browser and assistive-technology testing.
+
+## 🤝 Contributing
+
+This is primarily a personal portfolio, but suggestions and improvements are welcome through issues or pull requests.
+
+⭐ If you find the portfolio useful or want to follow the project, consider starring the repository.
